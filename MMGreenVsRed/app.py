@@ -5,6 +5,7 @@ GREEN_TO_GREEN = [2, 3, 6]
 def is_green(obj):
     return obj.get_data == '1'
 
+
 class Cell:
 
     def __init__(self, cell_row, cell_col, cell_data):
@@ -61,7 +62,7 @@ rows = int(dimensions[1])
 
 if rows < 1000 and columns < 1000:
     # Filling the Generation Zero to the grid of objects
-    old_generation = [[object() for _ in range(rows)] for _ in range(columns)]
+    old_generation = [[Cell(0, 0, '') for _ in range(rows)] for _ in range(columns)]
     for row in range(rows):
         line = [x for x in list(input())]
         for column in range(len(line)):
@@ -76,7 +77,7 @@ if rows < 1000 and columns < 1000:
     result = 0
     # Start of the game
     for _ in range(generations_to_observe):
-        new_generation = [[object() for _ in range(rows)] for _ in range(columns)]
+        new_generation = [[Cell(0, 0, '') for _ in range(rows)] for _ in range(columns)]
 
         for r in range(rows):
             for c in range(columns):
