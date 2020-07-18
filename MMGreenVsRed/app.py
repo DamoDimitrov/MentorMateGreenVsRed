@@ -60,22 +60,20 @@ dimensions = input().split(", ")
 columns = int(dimensions[0])
 rows = int(dimensions[1])
 
-if rows < 1000 and columns < 1000:
-    # Filling the Generation Zero to the grid of objects
-    old_generation = [[Cell(0, 0, '') for _ in range(rows)] for _ in range(columns)]
+
+def validate_dimensions():
+    return rows < 1000 and columns < 1000
+
+
+def fill_the_grid_with_input_data():
     for row in range(rows):
         line = [x for x in list(input())]
         for column in range(len(line)):
             old_generation[row][column] = Cell(row, column, line[column])
 
-    # Getting the coordinates of the observed cell and the number of generations to be observed
-    coordinates_and_generations = input().split(", ")
-    generations_to_observe = int(coordinates_and_generations[2])
-    cell_to_observe_r = int(coordinates_and_generations[1])
-    cell_to_observe_c = int(coordinates_and_generations[0])
 
-    result = 0
-    # Start of the game
+def generate_result():
+    global result, old_generation
     for _ in range(generations_to_observe):
         new_generation = [[Cell(0, 0, '') for _ in range(rows)] for _ in range(columns)]
 
@@ -103,4 +101,20 @@ if rows < 1000 and columns < 1000:
                         new_generation[r][c] = Cell(r, c, '0')
         # The new generation becomes old generation
         old_generation = new_generation
+
+
+if validate_dimensions():
+    # Filling the Generation Zero to the grid of objects
+    old_generation = [[Cell(0, 0, '') for _ in range(rows)] for _ in range(columns)]
+    fill_the_grid_with_input_data()
+
+    # Getting the coordinates of the observed cell and the number of generations to be observed
+    coordinates_and_generations = input().split(", ")
+    generations_to_observe = int(coordinates_and_generations[2])
+    cell_to_observe_r = int(coordinates_and_generations[1])
+    cell_to_observe_c = int(coordinates_and_generations[0])
+
+    result = 0
+    # Start of the game
+    generate_result()
     print("Result: {}".format(result))
