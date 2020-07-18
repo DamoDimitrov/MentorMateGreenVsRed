@@ -6,6 +6,7 @@ def is_green(obj):
     return obj.get_data() == '1'
 
 
+# TODO Utility class
 class Cell:
 
     def __init__(self, cell_row, cell_col, cell_data):
@@ -22,16 +23,9 @@ class Cell:
     def get_row(self):
         return self.__row
 
-    def set_row(self, row):
-        self.__row = r
-
     def get_column(self):
         return self.__col
 
-    def set_column(self, col):
-        self.__col = col
-
-    # TODO refactor the method to work with objects
     def count_green_neighbours(self, grid):
         neighbours = 0
         if self.__col - 1 >= 0:
@@ -95,26 +89,18 @@ if rows < 1000 and columns < 1000:
                 # is green and is the observed one, incrementing result
                 if old_generation[r][c].get_data() == '0':
                     if green_neighbours in RED_TO_GREEN:
-                        new_generation[r][c].set_data('1')
-                        new_generation[r][c].set_row(r)
-                        new_generation[r][c].set_column(c)
+                        new_generation[r][c] = Cell(r, c, '1')
                         if r == cell_to_observe_r and c == cell_to_observe_c:
                             result = result + 1
                     else:
-                        new_generation[r][c].set_data('0')
-                        new_generation[r][c].set_row(r)
-                        new_generation[r][c].set_column(c)
+                        new_generation[r][c] = Cell(r, c, '0')
                 else:
                     if green_neighbours in GREEN_TO_GREEN:
-                        new_generation[r][c].set_data('1')
-                        new_generation[r][c].set_row(r)
-                        new_generation[r][c].set_column(c)
+                        new_generation[r][c] = Cell(r, c, '1')
                         if r == cell_to_observe_r and c == cell_to_observe_c:
                             result = result + 1
                     else:
-                        new_generation[r][c].set_data('0')
-                        new_generation[r][c].set_row(r)
-                        new_generation[r][c].set_column(c)
+                        new_generation[r][c] = Cell(r, c, '0')
         # The new generation becomes old generation
         old_generation = new_generation
     print("Result: {}".format(result))
