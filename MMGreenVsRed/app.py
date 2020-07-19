@@ -2,11 +2,11 @@ RED_TO_GREEN = [3, 6]
 GREEN_TO_GREEN = [2, 3, 6]
 
 
+# Checking if a cell is green
 def is_green(obj):
     return obj.get_data() == '1'
 
 
-# TODO Utility class
 class Cell:
 
     def __init__(self, cell_row, cell_col, cell_data):
@@ -61,10 +61,12 @@ columns = int(dimensions[0])
 rows = int(dimensions[1])
 
 
+# Validating that the dimensions are below 1000
 def validate_dimensions():
     return rows < 1000 and columns < 1000
 
 
+# Putting the input data into the grid
 def fill_the_grid_with_input_data():
     for row in range(rows):
         line = [x for x in list(input())]
@@ -72,6 +74,7 @@ def fill_the_grid_with_input_data():
             old_generation[row][column] = Cell(row, column, line[column])
 
 
+# Starting the game and generating the final result
 def generate_result():
     global result, old_generation
     for _ in range(generations_to_observe):
